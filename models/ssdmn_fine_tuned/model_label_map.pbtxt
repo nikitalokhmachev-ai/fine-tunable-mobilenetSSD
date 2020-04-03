@@ -1,0 +1,8 @@
+item {
+  name: "pillow"
+  id: 1
+}
+item {
+  name: "tst"
+  id: 2
+}
