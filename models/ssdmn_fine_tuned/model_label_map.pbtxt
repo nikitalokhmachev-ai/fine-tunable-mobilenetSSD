@@ -3,6 +3,10 @@ item {
   id: 1
 }
 item {
-  name: "tst"
+  name: "trash"
   id: 2
+}
+item {
+  name: "tst"
+  id: 3
 }

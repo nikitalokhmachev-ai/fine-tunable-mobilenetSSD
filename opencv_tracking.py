@@ -45,6 +45,7 @@ initBB = None
 
 print("[INFO] starting video stream...")
 vs = cv2.VideoCapture(0)
+#vs = cv2.VideoCapture('D:/Projects/TFMobileNet/v2.mp4')
 time.sleep(1.0)
 
 while True:

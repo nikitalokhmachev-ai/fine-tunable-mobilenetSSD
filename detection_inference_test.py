@@ -5,10 +5,15 @@ from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
 
 import cv2
+import time
 import os
 
 from utils import label_map_util
 from utils import visualization_utils as vis_util
+
+#from numba import cuda 
+#device = cuda.get_current_device()
+#device.reset()
 
 config = ConfigProto()
 config.gpu_options.allow_growth = True
@@ -49,6 +54,8 @@ with open(PATH_TO_LABELS, 'r') as f:
 NUM_CLASSES = len(data)
 
 cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture('D:/Projects/TFMobileNet/v3.mp4')
+
 detection_graph = tf.Graph()
 with detection_graph.as_default():
   od_graph_def = tf.compat.v1.GraphDef()
@@ -67,7 +74,6 @@ def load_image_into_numpy_array(image):
   return np.array(image.getdata()).reshape((im_height, im_width, 3)).astype(np.uint8)
 
 IMAGE_SIZE = (12, 8)
-
 
 with detection_graph.as_default():
   with tf.compat.v1.Session(graph=detection_graph) as sess:
@@ -96,8 +102,10 @@ with detection_graph.as_default():
           category_index,
           use_normalized_coordinates=True,
           line_thickness=8)
-
+      
+      
       cv2.imshow('object detection', cv2.resize(image_np, (800,600)))
+      
       if cv2.waitKey(25) & 0xFF == ord('q'):
         cap.release()
         cv2.destroyAllWindows()
